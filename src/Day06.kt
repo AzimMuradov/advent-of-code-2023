@@ -2,6 +2,7 @@ import kotlin.math.ceil
 import kotlin.math.floor
 import kotlin.math.sqrt
 
+
 fun main() {
     fun calc(time: Long, minDist: Long): Long {
         val d = (time * time - 4 * minDist).toDouble()

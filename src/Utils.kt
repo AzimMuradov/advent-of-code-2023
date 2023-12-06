@@ -4,6 +4,7 @@ import kotlin.io.path.Path
 import kotlin.io.path.readLines
 import kotlin.io.path.readText
 
+
 /**
  * Reads text from the given input txt file.
  */
