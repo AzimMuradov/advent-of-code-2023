@@ -4,35 +4,34 @@ fun main() {
     fun Card(line: String): Card {
         val info = line.split(":").last().trim()
         val (w, m) = info.split("|").map { it.trim() }
-        return Card(
-            winning = w.split(" ").mapNotNullTo(mutableSetOf()) { it.toIntOrNull() },
-            my = m.split(" ").mapNotNullTo(mutableSetOf()) { it.toIntOrNull() },
-        )
+
+        fun parseNums(setOfNums: String) = setOfNums
+            .split(" ")
+            .mapNotNullTo(mutableSetOf(), String::toIntOrNull)
+
+        return Card(winning = parseNums(w), my = parseNums(m))
+    }
+
+    fun List<String>.matchesPerCard() = map(::Card).map { (winning, my) ->
+        (winning intersect my).size
     }
 
     fun part1(input: List<String>): Int = input
-        .map(::Card)
-        .sumOf { (winning, my) ->
-            val matches = (winning intersect my).size
-            if (matches != 0) 1 shl (matches - 1) else 0
-        }
+        .matchesPerCard()
+        .sumOf { matches -> if (matches != 0) 1 shl (matches - 1) else 0 }
 
     fun part2(input: List<String>): Int {
-        val cardToWonCardsAmount = input
-            .map(::Card)
-            .mapIndexed { index, (winning, my) ->
-                val matches = (winning intersect my).size
-                index to matches
-            }
-            .toMap()
+        val matchesPerCard = input.matchesPerCard()
 
-        val cardToTotalWonCardsAmount = mutableMapOf<Int, Int>()
-        for (cardNum in input.indices.reversed()) {
-            val cardsWon = (cardNum + 1)..(cardNum + cardToWonCardsAmount[cardNum]!!).coerceAtMost(input.lastIndex)
-            cardToTotalWonCardsAmount[cardNum] = cardsWon.count() + cardsWon.sumOf(cardToTotalWonCardsAmount::getValue)
+        val wonAmountPerCard = IntArray(input.size)
+        for (card in input.indices.reversed()) {
+            val cardsWonRange = (card + 1..card + matchesPerCard[card])
+                .filter { it in input.indices }
+
+            wonAmountPerCard[card] = cardsWonRange.count() + cardsWonRange.sumOf(wonAmountPerCard::get)
         }
 
-        return cardToTotalWonCardsAmount.values.sum() + cardToTotalWonCardsAmount.size
+        return wonAmountPerCard.sum() + wonAmountPerCard.size
     }
 
     val input = readInput("day-04-input")
