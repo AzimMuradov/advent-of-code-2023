@@ -34,7 +34,7 @@ fun main() {
         return wonAmountPerCard.sum() + wonAmountPerCard.size
     }
 
-    val input = readInput("day-04-input")
+    val input = readInputLines("day-04-input")
 
     part1(input).println()
     part2(input).println()

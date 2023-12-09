@@ -26,7 +26,7 @@ fun main() {
             .sumOf(String::toInt)
     }
 
-    val input = readInput("day-01-input")
+    val input = readInputLines("day-01-input")
 
     part1(input).println()
     part2(input).println()

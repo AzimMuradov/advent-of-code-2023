@@ -42,7 +42,7 @@ fun main() {
         return calc(time, dist)
     }
 
-    val input = readInput("day-06-input")
+    val input = readInputLines("day-06-input")
 
     part1(input).println()
     part2(input).println()

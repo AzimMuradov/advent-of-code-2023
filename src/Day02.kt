@@ -38,7 +38,7 @@ fun main() {
         .sumOf { (_, r, g, b) -> r * g * b }
         .toInt()
 
-    val input = readInput("day-02-input")
+    val input = readInputLines("day-02-input")
 
     part1(input).println()
     part2(input).println()

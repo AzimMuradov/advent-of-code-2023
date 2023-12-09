@@ -78,7 +78,7 @@ fun main() {
         .map { it.value.reduce(Int::times) }
         .sum()
 
-    val input = readInput("day-03-input")
+    val input = readInputLines("day-03-input")
 
     part1(input).println()
     part2(input).println()
