@@ -1,4 +1,9 @@
-.gradle
-.idea
-build
+/.gradle/
+
+/.idea/*
+!/.idea/file.template.settings.xml
+!/.idea/fileTemplates/
+
+build/
+
 src/**/*.txt
