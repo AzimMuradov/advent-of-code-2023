@@ -1,6 +1,7 @@
 /.gradle/
 
 /.idea/*
+!/.idea/runConfigurations/
 !/.idea/file.template.settings.xml
 !/.idea/fileTemplates/
 
