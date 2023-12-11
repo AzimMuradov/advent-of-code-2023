@@ -1,3 +1,5 @@
+// TODO : Refactor the code...
+
 fun main() {
     fun availableCsForS(c: Coordinate, maze: Maze): List<Coordinate> =
         Dir.entries.mapNotNull { dir -> dir.goIfCan(c, maze) }
@@ -39,15 +41,12 @@ fun main() {
         val sX = maze[sY].indexOf('S')
         val s = Coordinate(sX, sY)
 
-        val loop = generateSequence(seed = s to availableCsForS(s, maze).first()) { (prev, curr) ->
+        val loop = generateSequence(seed = s to availableCsForS(s, maze).first()) { (prev, curr): Pair<Coordinate, Coordinate> ->
             if (maze[curr] != 'S') {
                 curr to availableCs(curr, maze).first { it != prev }
             } else {
                 null
             }
-        }.onEach {
-            // println(it.second)
-            // println(maze[it.second])
         }.map {
             it.first
         }.toSet()
